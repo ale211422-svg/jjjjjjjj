@@ -1,0 +1,74 @@
+<!-- HTML -->
+<form id="registroForm">
+  <input type="text" id="nombre" placeholder="Nombre completo">
+  <span id="usernameFeedback"></span>
+  
+  <input type="email" id="email" placeholder="Correo electrónico">
+  <span id="emailError"></span>
+  
+  <input type="password" id="password" placeholder="Contraseña">
+  <span id="passwordError"></span>
+  
+  <button type="submit">Registrarse</button>
+</form>
+
+<style>
+.feedback {
+  font-size: 0.8em;
+  color: #000;
+}
+.valido {
+  color: green;
+}
+.invalido {
+  color: red;
+}
+</style>
+
+<script>
+  document.getElementById('registroForm').onsubmit = function(e) {
+    e.preventDefault();
+    let valido = true;
+
+  // Validar nombre
+  const nombre = document.getElementById('nombre').oninput=function(){
+      const nombre = this.value;
+      const feedback = document.getElementById('usernameFeedback');
+      
+      if(nombre.length < 4){
+        showFeedback('Mínimo 4 caracteres', 'invalido')
+        valido=false;
+        } else if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+        showFeedback('Solo letras, números y guiones bajos', 'invalido')
+        valido=false;
+        } else {
+        showFeedback('Nombre de usuario válido', 'valido');
+        }
+    }
+    }
+
+  // Validar email
+  const email = document.getElementById('email').value;
+  if (!/\S+@\S+\.\S+/.test(email)) {
+    showError('emailError', 'Email inválido');
+    valido = false;
+  }
+
+  const password = document.getElementById('password').value;
+  if (password.length < 6) {
+    showError('passwordError', 'Mínimo 6 caracteres');
+    valido = false;
+  }
+
+  if (valido) {
+    alert('Formulario enviado correctamente');
+    this.reset();
+  }
+  
+
+function showFeedback(mensaje, tipo) {
+    feedback.textContent = mensaje;
+    feedback.className = `feedback ${tipo}`;
+  }
+
+</script>
